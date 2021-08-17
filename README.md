@@ -5,3 +5,5 @@
   - [courseinfo](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%201/courseinfo)
   - [unicafe](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%201/unicafe)
   - [anecdotes](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%201/anecdotes)
+- [Part 2](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%202)
+  - [course-information](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%202/course-information)
