@@ -96,7 +96,7 @@ const App = () => {
   return (
     <div>
       Find countries{' '}
-      <input value={searchCountries} onChange={handleSearch} placeholder='Search...' />
+      <input value={searchCountries} onChange={handleSearch} placeholder='Search a country...' />
       {!showCountry && filterCountry.length !== countries.length && renderCountries()}
       {showCountry}
       {weather}

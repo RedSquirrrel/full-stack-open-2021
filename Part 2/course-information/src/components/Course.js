@@ -31,7 +31,7 @@ const Content = ({ courseContent }) => {
 
 const Course = ({ courses }) => {
   return (
-    <div>
+    <>
       {courses.map(course => {
         return (
           <div key={course.id}>
@@ -41,7 +41,7 @@ const Course = ({ courses }) => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 
