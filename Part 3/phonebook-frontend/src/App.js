@@ -30,60 +30,63 @@ const App = () => {
       number: newPhoneNumber,
     };
 
-    const updatePersonInfo = () => {
+    if (existingPerson && !existingNumber) {
       const id = persons.find(p => p.name.toLowerCase() === newName.toLowerCase()).id;
+      if (
+        window.confirm(
+          `${newName} is already added to phonebook, replace the old number with a new one?`
+        )
+      ) {
+        personService
+          .update(id, personObject)
+          .then(returnedPerson => {
+            setChecker(true);
+            setShowMessage(`${returnedPerson.name} has successfully updated`);
+            setTimeout(() => {
+              setShowMessage(null);
+            }, 4000);
+            setPersons(persons.map(p => (p.id !== id ? p : returnedPerson)));
+            setNewName('');
+          })
+          .catch(error => {
+            setChecker(false);
+            setShowMessage(`${error.response.data.error}`);
+            setTimeout(() => {
+              setShowMessage(null);
+            }, 4000);
+          })
+          .catch(error => {
+            setChecker(false);
+            setShowMessage(
+              `Information of ${personObject.name} has already been removed from the server`
+            );
+            setTimeout(() => {
+              setShowMessage(null);
+            }, 4000);
+            setPersons(persons.filter(p => p.id !== id));
+          });
+
+        setNewName('');
+        setNewPhoneNumber('');
+      }
+    } else if (personObject.name && personObject.number && !existingPerson) {
       personService
-        .update(id, personObject)
+        .create(personObject)
         .then(returnedPerson => {
           setChecker(true);
-          setShowMessage(`${returnedPerson.name} has successfully updated`);
+          setShowMessage(`Added ${returnedPerson.name}`);
           setTimeout(() => {
             setShowMessage(null);
           }, 4000);
-          setPersons(persons.map(p => (p.id !== id ? p : returnedPerson)));
-          setNewName('');
+          setPersons(persons.concat(returnedPerson));
         })
         .catch(error => {
           setChecker(false);
-          setShowMessage(
-            `Information of ${personObject.name} has already been removed from the server`
-          );
+          setShowMessage(`${error.response.data.error}`);
           setTimeout(() => {
             setShowMessage(null);
           }, 4000);
-          setPersons(persons.filter(p => p.id !== id));
-          console.log(error);
         });
-
-      setNewName('');
-      setNewPhoneNumber('');
-    };
-
-    if (
-      existingPerson &&
-      existingNumber &&
-      window.confirm(
-        `${newName} is already added to phonebook, replace the old number with a new one?`
-      )
-    ) {
-      return updatePersonInfo();
-    } else if (
-      existingPerson &&
-      !existingNumber &&
-      window.confirm(
-        `${newName} is already added to phonebook, replace the old number with a new one?`
-      )
-    ) {
-      return updatePersonInfo();
-    } else if (personObject.name && personObject.number && !existingPerson) {
-      personService.create(personObject).then(returnedPerson => {
-        setChecker(true);
-        setShowMessage(`Added ${returnedPerson.name}`);
-        setTimeout(() => {
-          setShowMessage(null);
-        }, 4000);
-        setPersons(persons.concat(returnedPerson));
-      });
     }
     setNewName('');
     setNewPhoneNumber('');
@@ -110,9 +113,12 @@ const App = () => {
     const changedPerson = { ...person, name: person.name };
 
     if (window.confirm(`Delete ${changedPerson.name}?`)) {
-      personService.deletePerson(id).then(() => {
-        setPersons(persons.filter(p => p.id !== id));
-      });
+      personService
+        .deletePerson(id)
+        .then(() => {
+          setPersons(persons.filter(p => p.id !== id));
+        })
+        .catch(error => console.log(error));
     }
   };
 
