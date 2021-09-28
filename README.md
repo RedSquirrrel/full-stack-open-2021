@@ -13,4 +13,4 @@
   - [phonebook frontend](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%203/phonebook-frontend)
   - [Github repository for phonebook backend - part3](https://github.com/RedSquirrrel/phonebook-backend-part3-2021)
 - [Part 4](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%204)
-  - [Blog List](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%204/Blog%20List)
+  - [Blog List](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%204/Blog-List)
