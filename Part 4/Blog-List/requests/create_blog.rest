@@ -1,5 +1,6 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJlZFNxdWlycnJlbCIsImlkIjoiNjE3ZmYyYjU0YTgxMTMyOTRjMDNlOTJjIiwiaWF0IjoxNjM1Nzc1MTc3LCJleHAiOjE2MzU3Nzg3Nzd9.5ZKB9Bl7nV5lqlFI8WDTQMbGi6CMKyvxBeXFVdBJero
  
 {
     "title": "Let’s Dive Into Cypress For End-to-End Testing",
