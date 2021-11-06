@@ -21,9 +21,6 @@ blogsRouter.post('/', async (request, response) => {
 
   const user = await User.findById(decodedToken.id);
 
-  console.log('token', token);
-  console.log('decoded Token', decodedToken);
-
   const blog = new Blog({
     title: body.title,
     author: body.author,
@@ -50,8 +47,17 @@ blogsRouter.get('/:id', async (request, response) => {
 });
 
 blogsRouter.delete('/:id', async (request, response) => {
-  await Blog.findByIdAndRemove(request.params.id);
-  response.status(204).end();
+  const blog = await Blog.findById(request.params.id);
+  const token = request.token;
+
+  const userid = jwt.verify(token, process.env.SECRET);
+
+  if (blog.user.toString() === userid.id.toString()) {
+    await Blog.findByIdAndRemove(request.params.id);
+    return response.status(204).end();
+  } else {
+    return response.status(401).json({ error: 'Unauthorized person' }).end();
+  }
 });
 
 blogsRouter.put('/:id', async (request, response) => {
