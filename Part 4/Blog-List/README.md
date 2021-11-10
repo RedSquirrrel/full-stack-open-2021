@@ -33,3 +33,4 @@
 - 4.19: bloglist expansion, step7
 - 4.20\*: bloglist expansion, step8
 - 4.21\*: bloglist expansion, step9
+- 4.22\*: bloglist expansion, step10
