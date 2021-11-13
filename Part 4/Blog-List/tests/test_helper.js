@@ -6,7 +6,7 @@ const initialBlogs = [
     title: 'The Complete JavaScript Promise Guide',
     author: 'Kyle Cook',
     url: 'https://blog.webdevsimplified.com/2021-09/javascript-promises/',
-    likes: 10,
+    likes: 20,
   },
   {
     title: 'How to add testing to an existing project',
@@ -26,4 +26,10 @@ const usersInDB = async () => {
   return users.map(user => user.toJSON());
 };
 
-module.exports = { initialBlogs, blogsInDB, usersInDB };
+const newUser = {
+  username: 'Anette',
+  name: 'Cami',
+  password: 'secret',
+};
+
+module.exports = { initialBlogs, blogsInDB, usersInDB, newUser };

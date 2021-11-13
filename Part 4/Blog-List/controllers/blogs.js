@@ -9,7 +9,6 @@ blogsRouter.get('/', async (request, response) => {
 blogsRouter.post('/', async (request, response) => {
   const body = request.body;
   const user = request.user;
-  console.log('user from POST', user);
 
   const blog = new Blog({
     title: body.title,
@@ -39,14 +38,13 @@ blogsRouter.get('/:id', async (request, response) => {
 blogsRouter.delete('/:id', async (request, response) => {
   const blog = await Blog.findById(request.params.id);
   const user = request.user;
-  console.log('user from DELETE', user);
 
   if (blog.user.toString() === user.id.toString()) {
     await Blog.findByIdAndRemove(request.params.id);
     return response.status(204).end();
-  } else {
-    return response.status(401).json({ error: 'Unauthorized person' }).end();
   }
+
+  response.status(401).json({ error: 'Unauthorized person' });
 });
 
 blogsRouter.put('/:id', async (request, response) => {
