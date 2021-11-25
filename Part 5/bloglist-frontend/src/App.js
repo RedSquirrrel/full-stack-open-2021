@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import Blog from './components/Blog';
+import BlogForm from './components/BlogForm';
+import Togglable from './components/Togglable';
 import Notification from './components/Notification';
 import blogService from './services/blogs';
 import loginServices from './services/login';
@@ -16,9 +18,7 @@ const App = () => {
   const [password, setPassword] = useState(' ');
   const [user, setUser] = useState(null);
 
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [url, setUrl] = useState('');
+  const blogFormRef = useRef();
 
   useEffect(() => {
     blogService.getAll().then(blogs => setBlogs(blogs));
@@ -100,20 +100,11 @@ const App = () => {
     );
   };
 
-  const addBlog = async e => {
-    e.preventDefault();
+  const addBlog = async newBlogObject => {
+    blogFormRef.current.toggleVisibility();
     try {
-      const newBlogObject = {
-        title: title,
-        author: author,
-        url: url,
-      };
-
       const returnedBlog = await blogService.create(newBlogObject);
       setBlogs(blogs.concat(returnedBlog));
-      setTitle('');
-      setAuthor('');
-      setUrl('');
       setChecker(true);
       setMessage(`A new blog "${newBlogObject.title}" by "${newBlogObject.author}" added`);
       setTimeout(() => {
@@ -128,25 +119,15 @@ const App = () => {
     }
   };
 
-  const newBlogForm = () => (
-    <div>
-      <h2>Create new </h2>
-      <form onSubmit={addBlog}>
-        Title: <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
-        Author: <input type='text' value={author} onChange={e => setAuthor(e.target.value)} />
-        Url: <input type='text' value={url} onChange={e => setUrl(e.target.value)} />
-        <button type='submit'>Create</button>
-      </form>
-    </div>
-  );
-
   const allBlogsAndCreateBlogsForm = () => (
     <div>
       <h1>Blogs</h1>
       {message && <Notification message={message} checker={checker} />}
       <h3 style={{ display: 'inline' }}>{user.name} logged in </h3>
       <button onClick={handleLogOut}>Logout</button>
-      {newBlogForm()}
+      <Togglable buttonLabel='Create A New Blog' ref={blogFormRef}>
+        <BlogForm newBlogObject={addBlog} />
+      </Togglable>
       {allBlogs()}
     </div>
   );
