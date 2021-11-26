@@ -1,3 +1,23 @@
+body {
+  background: #333;
+  color: #fff;
+}
+
+input {
+  background-color: #333;
+  color: #fff;
+}
+
+button {
+  background-color: rgb(80, 80, 80);
+  cursor: pointer;
+  color: #fff;
+}
+
+.btn {
+  float: right;
+}
+
 .error {
   color: red;
   background: lightgrey;

@@ -90,11 +90,33 @@ const App = () => {
     </div>
   );
 
+  const handleLogOut = () => {
+    localStorage.removeItem('blogUser');
+    window.location.href = '/';
+  };
+
+  const updateBlog = async id => {
+    try {
+      const blogId = blogs.find(l => l.id === id);
+      const changedBlog = { ...blogs, likes: blogId.likes + 1 };
+
+      const returnedBlog = await blogService.update(id, changedBlog);
+      setBlogs(blogs.map(blog => (blog.id !== id ? blog : returnedBlog)));
+    } catch (error) {
+      console.log(error);
+      setChecker(false);
+      setMessage('Update error');
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+    }
+  };
+
   const allBlogs = () => {
     return (
       <div>
         {blogs.map(blog => (
-          <Blog key={blog.id} blog={blog} />
+          <Blog key={blog.id} blog={blog} updateBlog={() => updateBlog(blog.id)} />
         ))}
       </div>
     );
@@ -132,12 +154,12 @@ const App = () => {
     </div>
   );
 
-  const handleLogOut = () => {
-    localStorage.removeItem('blogUser');
-    window.location.href = '/';
+  const container = {
+    maxWidth: 1000,
+    margin: ' 0 auto',
   };
 
-  return <div>{user === null ? loginForm() : allBlogsAndCreateBlogsForm()}</div>;
+  return <div style={container}>{user === null ? loginForm() : allBlogsAndCreateBlogsForm()}</div>;
 };
 
 export default App;

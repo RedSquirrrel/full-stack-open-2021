@@ -8,3 +8,4 @@
 - 5.5 Blog list frontend, step5
 - 5.6 Blog list frontend, step6
 - 5.7\* Blog list frontend, step7
+  -5.8\*: Blog list frontend, step8
