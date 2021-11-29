@@ -20,6 +20,8 @@ const App = () => {
 
   const blogFormRef = useRef();
 
+  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
+
   useEffect(() => {
     blogService.getAll().then(blogs => setBlogs(blogs));
   }, []);
@@ -101,7 +103,7 @@ const App = () => {
       const changedBlog = { ...blogs, likes: blogId.likes + 1 };
 
       const returnedBlog = await blogService.update(id, changedBlog);
-      setBlogs(blogs.map(blog => (blog.id !== id ? blog : returnedBlog)));
+      setBlogs(sortedBlogs.map(blog => (blog.id !== id ? blog : returnedBlog)));
     } catch (error) {
       console.log(error);
       setChecker(false);
