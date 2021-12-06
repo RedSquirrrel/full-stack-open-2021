@@ -117,9 +117,16 @@ const App = () => {
   const allBlogs = () => {
     return (
       <div>
-        {blogs.map(blog => (
-          <Blog key={blog.id} blog={blog} updateBlog={() => updateBlog(blog.id)} />
-        ))}
+        {blogs.length &&
+          blogs.map(blog => (
+            <Blog
+              key={blog.id}
+              blog={blog}
+              updateBlog={() => updateBlog(blog.id)}
+              deleteBlog={() => deleteBlog(blog.id)}
+              user={user}
+            />
+          ))}
       </div>
     );
   };
@@ -133,13 +140,13 @@ const App = () => {
       setMessage(`A new blog "${newBlogObject.title}" by "${newBlogObject.author}" added`);
       setTimeout(() => {
         setMessage(null);
-      }, 5000);
+      }, 2000);
     } catch (extention) {
       setChecker(false);
       setMessage('Not corect');
       setTimeout(() => {
         setMessage(null);
-      }, 5000);
+      }, 2000);
     }
   };
 
@@ -155,6 +162,15 @@ const App = () => {
       {allBlogs()}
     </div>
   );
+
+  const deleteBlog = async id => {
+    const blog = blogs.find(l => l.id === id);
+
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      await blogService.removeBlog(id);
+      setBlogs(blogs.filter(b => b.id !== blog.id));
+    }
+  };
 
   const container = {
     maxWidth: 1000,

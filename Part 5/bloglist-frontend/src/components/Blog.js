@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-const Blog = ({ blog, updateBlog }) => {
+const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   const [show, setShow] = useState(false);
-  // const [like, setLike] = useState(0);
 
   const label = !show ? 'View' : 'Hide';
   const toggleShow = () => {
@@ -32,7 +31,8 @@ const Blog = ({ blog, updateBlog }) => {
             Likes: {blog.likes}
             <button onClick={updateBlog}>Like</button>
           </div>
-          <div>{blog.author}</div>
+          <div>{blog.author} </div>
+          {blog.user[0].username === user.username && <button onClick={deleteBlog}>Remove</button>}
         </div>
       )}
     </div>
