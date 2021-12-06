@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   const [show, setShow] = useState(false);
@@ -14,6 +15,11 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     border: 'solid',
     borderWidth: 1,
     marginBottom: 5,
+  };
+
+  const buttonStyle = {
+    background: 'blue',
+    color: 'white',
   };
 
   return (
@@ -32,11 +38,22 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
             <button onClick={updateBlog}>Like</button>
           </div>
           <div>{blog.author} </div>
-          {blog.user[0].username === user.username && <button onClick={deleteBlog}>Remove</button>}
+          {blog.user[0].username === user.username && (
+            <button style={buttonStyle} onClick={deleteBlog}>
+              Remove
+            </button>
+          )}
         </div>
       )}
     </div>
   );
+};
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  updateBlog: PropTypes.func.isRequired,
+  deleteBlog: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default Blog;
