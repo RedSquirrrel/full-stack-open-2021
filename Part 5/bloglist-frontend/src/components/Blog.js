@@ -25,7 +25,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   return (
     <div style={blogStyle}>
       <div>
-        {blog.title}
+        {blog.title} <strong style={{ color: '#f5eda9' }}>by {blog.author}</strong>
         <button className='btn' onClick={() => toggleShow()}>
           {label}
         </button>
@@ -36,8 +36,8 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
           <div>
             Likes: {blog.likes}
             <button onClick={updateBlog}>Like</button>
+            <div>{blog.user[0].username}</div>
           </div>
-          <div>{blog.author} </div>
           {blog.user[0].username === user.username && (
             <button style={buttonStyle} onClick={deleteBlog}>
               Remove

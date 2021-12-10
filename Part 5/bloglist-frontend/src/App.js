@@ -74,7 +74,7 @@ const App = () => {
             value={username}
             name='Username'
             autoComplete='username'
-            onChange={({ target }) => setUsername(target.value)}
+            onChange={({ target }) => setUsername(target.value.trim())}
           />
         </div>
         <div>
