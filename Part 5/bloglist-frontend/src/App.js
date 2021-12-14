@@ -23,7 +23,7 @@ const App = () => {
   const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
 
   useEffect(() => {
-    blogService.getAll().then(blogs => setBlogs(blogs));
+    blogService.getAll().then(initialBlogs => setBlogs(initialBlogs));
   }, []);
 
   useEffect(() => {
@@ -113,20 +113,25 @@ const App = () => {
       }, 5000);
     }
   };
+  // let blogPostByUser;
 
   const allBlogs = () => {
     return (
       <div>
         {blogs.length &&
-          blogs.map(blog => (
-            <Blog
-              key={blog.id}
-              blog={blog}
-              updateBlog={() => updateBlog(blog.id)}
-              deleteBlog={() => deleteBlog(blog.id)}
-              user={user}
-            />
-          ))}
+          blogs.map(blog => {
+            let blogPostByUser = blog.user[0].username;
+            return (
+              <Blog
+                key={blog.id}
+                blog={blog}
+                updateBlog={() => updateBlog(blog.id)}
+                deleteBlog={() => deleteBlog(blog.id)}
+                user={user}
+                blogPostByUser={blogPostByUser}
+              />
+            );
+          })}
       </div>
     );
   };
@@ -159,7 +164,7 @@ const App = () => {
       <Togglable buttonLabel='Create A New Blog' ref={blogFormRef}>
         <BlogForm newBlogObject={addBlog} />
       </Togglable>
-      {allBlogs()}
+      {blogs.length ? allBlogs() : <h3>No blogs exists</h3>}
     </div>
   );
 
