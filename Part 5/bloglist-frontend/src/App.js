@@ -68,8 +68,9 @@ const App = () => {
       {message && <Notification message={message} checker={checker} />}
       <form onSubmit={handleLogin}>
         <div>
-          Username:{' '}
+          Username:
           <input
+            id='username'
             type='text'
             value={username}
             name='Username'
@@ -78,16 +79,19 @@ const App = () => {
           />
         </div>
         <div>
-          Password:{' '}
+          Password:
           <input
+            id='password'
             type='password'
             value={password}
             name='Password'
             autoComplete='current-password'
-            onChange={({ target }) => setPassword(target.value)}
+            onChange={({ target }) => setPassword(target.value.trim())}
           />
         </div>
-        <button type='submit'>Login</button>
+        <button id='loginBtn' type='submit'>
+          Login
+        </button>
       </form>
     </div>
   );
@@ -113,7 +117,6 @@ const App = () => {
       }, 5000);
     }
   };
-  // let blogPostByUser;
 
   const allBlogs = () => {
     return (

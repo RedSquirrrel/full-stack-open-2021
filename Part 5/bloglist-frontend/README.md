@@ -19,3 +19,7 @@
 - 5.14\*: Blog list tests, step2
 - 5.15\*: Blog list tests, step3
 - 5.16\*: Blog list tests, step4
+
+- 5.17: bloglist end to end testing, step1
+- 5.18: bloglist end to end testing, step2
+- 5.19: bloglist end to end testing, step3
