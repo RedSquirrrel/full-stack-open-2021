@@ -26,7 +26,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, blogPostByUser, user }) => {
     <div style={blogStyle} className='blogs'>
       <div className='first-div'>
         {blog.title} <strong style={{ color: '#f5eda9' }}>by {blog.author}</strong>
-        <button className='btn' onClick={() => toggleShow()}>
+        <button id='viewBtn' className='btn' onClick={() => toggleShow()}>
           {label}
         </button>
       </div>
@@ -35,12 +35,12 @@ const Blog = ({ blog, updateBlog, deleteBlog, blogPostByUser, user }) => {
           <div>{blog.url}</div>
           <div>
             Likes: {blog.likes}
-            <button className='likeBtn' onClick={updateBlog}>
+            <button id='like-button' className='likeBtn' onClick={updateBlog}>
               Like
             </button>
           </div>
           {blogPostByUser === user.username ? (
-            <button className='deleteBtn' style={buttonStyle} onClick={deleteBlog}>
+            <button id='delete-button' className='deleteBtn' style={buttonStyle} onClick={deleteBlog}>
               Remove
             </button>
           ) : null}

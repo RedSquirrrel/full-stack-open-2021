@@ -2,17 +2,24 @@ describe('Blog app', function () {
   beforeEach(function () {
     cy.request('POST', 'http://localhost:3003/api/testing/reset');
 
-    const user = {
+    const userOne = {
       name: 'RedSquirrrel',
       username: 'Anette',
       password: 'password',
     };
 
-    cy.request('POST', 'http://localhost:3003/api/users/', user);
+    const userTwo = {
+      name: 'Ryan',
+      username: 'Second_user',
+      password: '123',
+    };
+
+    cy.request('POST', 'http://localhost:3003/api/users/', userOne);
+    cy.request('POST', 'http://localhost:3003/api/users/', userTwo);
     cy.visit('http://localhost:3000');
   });
 
-  it('Login form is shown', function () {
+  it('The application displays the login form by default', function () {
     cy.contains('Log in to application');
     cy.get('#username');
     cy.get('#password');
@@ -45,6 +52,22 @@ describe('Blog app', function () {
   describe('When logged in', function () {
     beforeEach(function () {
       cy.login({ username: 'Anette', password: 'password' });
+
+      cy.addBlog({
+        title: 'First blog',
+        author: 'First test author',
+        url: 'www.youtube.com',
+      });
+      cy.addBlog({
+        title: 'Second blog',
+        author: 'Second test author',
+        url: 'www.youtube.com',
+      });
+      cy.addBlog({
+        title: 'Third blog',
+        author: 'Third test author',
+        url: 'www.youtube.com',
+      });
     });
 
     it('A blog can be created', function () {
@@ -55,6 +78,31 @@ describe('Blog app', function () {
       cy.get('#submitBtn').click();
 
       cy.contains('A new Blog by Test author');
+    });
+
+    it('users can like a blog', function () {
+      cy.contains('Second blog').contains('View').click();
+      cy.contains('Second blog').parent().find('#like-button').click();
+      cy.contains('Second blog').parent().should('contain', 'Likes: 1');
+    });
+
+    it('user who created a blog can delete it', function () {
+      cy.contains('Third blog').contains('View').click();
+
+      cy.contains('Remove').click();
+      cy.get('html').should('not.contain', 'Third blog');
+    });
+
+    describe('Another user', function () {
+      beforeEach(function () {
+        cy.login({ username: 'Second_user', password: '123' });
+      });
+
+      it('other users cannot delete the blog', function () {
+        cy.contains('Ryan logged in');
+        cy.contains('Second blog').contains('View').click();
+        cy.get('#delete-button').should('not.exist');
+      });
     });
   });
 });
