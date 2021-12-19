@@ -19,7 +19,7 @@ describe('Blog app', function () {
     cy.visit('http://localhost:3000');
   });
 
-  it('The application displays the login form by default', function () {
+  it('Login form is shown', function () {
     cy.contains('Log in to application');
     cy.get('#username');
     cy.get('#password');
@@ -102,6 +102,25 @@ describe('Blog app', function () {
         cy.contains('Ryan logged in');
         cy.contains('Second blog').contains('View').click();
         cy.get('#delete-button').should('not.exist');
+      });
+
+      describe('blogs are ordered according to likes with the blog with the most likes being first', () => {
+        it('sorted blogs', function () {
+          cy.get('.blogs').then($blog => {
+            cy.wrap($blog[2]).contains('View').click();
+            cy.wrap($blog[2]).parent().find('#like-button').click();
+            cy.wrap($blog[2]).parent().should('contain', 'Likes: 1');
+            cy.wait(500);
+
+            cy.wrap($blog[2]).parent().find('#like-button').click();
+            cy.wrap($blog[2]).parent().should('contain', 'Likes: 2');
+            cy.wait(500);
+
+            cy.wrap($blog[2]).parent().find('#like-button').click();
+            cy.wrap($blog[2]).parent().should('contain', 'Likes: 3');
+          });
+          cy.get('.blogs').first().should('contain', 'Third blog by Third test author');
+        });
       });
     });
   });
