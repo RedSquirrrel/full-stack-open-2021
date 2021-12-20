@@ -123,7 +123,7 @@ const App = () => {
       <div>
         {blogs.length &&
           blogs.map(blog => {
-            let blogPostByUser = blog.user[0].username;
+            let blogPostByUser = blog.user.username;
             return (
               <Blog
                 key={blog.id}
@@ -151,7 +151,7 @@ const App = () => {
       }, 2000);
     } catch (extention) {
       setChecker(false);
-      setMessage('Not corect');
+      setMessage('Add a title, author and url');
       setTimeout(() => {
         setMessage(null);
       }, 2000);
@@ -174,7 +174,7 @@ const App = () => {
   const deleteBlog = async id => {
     const blog = blogs.find(l => l.id === id);
 
-    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+    if (window.confirm(`Remove blog "${blog.title}" by "${blog.author}"`)) {
       await blogService.removeBlog(id);
       setBlogs(blogs.filter(b => b.id !== blog.id));
     }
