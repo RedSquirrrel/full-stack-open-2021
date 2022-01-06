@@ -1,4 +1,4 @@
-## Finished exercises for Full Stack Open 2021:
+## Finished exercises for [Full Stack Open 2021](https://fullstackopen.com/en/):
 
 - [Part 0](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%200)
 - [Part 1](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%201)
@@ -17,3 +17,5 @@
 - [Part 5](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%205)
   - [Blog List Frontend](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%205/bloglist-frontend)
   - [Blog List Backend](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%205/bloglist-backend)
+- [Part 6](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%206)
+  - [Unicafe-Redux](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%206/unicafe-redux)
