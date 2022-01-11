@@ -19,3 +19,4 @@
   - [Blog List Backend](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%205/bloglist-backend)
 - [Part 6](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%206)
   - [Unicafe-Redux](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%206/unicafe-redux)
+  - [Redux-Anecdotes](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%206/redux-anecdotes)
