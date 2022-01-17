@@ -13,3 +13,8 @@
 - 6.10 Better anecdotes, step8
 - 6.11 Better anecdotes, step9
 - 6.12\* Better anecdotes, step10
+
+---
+
+- 6.13 Anecdotes and the backend, step1
+- 6.14 Anecdotes and the backend, step2
