@@ -25,3 +25,9 @@
 - 6.16 Anecdotes and the backend, step4
 - 6.17 Anecdotes and the backend, step5
 - 6.18 Anecdotes and the backend, step6
+
+---
+
+- 6.19 anecdotes and connect, step1
+- 6.20 anecdotes and connect, step2
+- 6.21 anecdotes, the grand finale
