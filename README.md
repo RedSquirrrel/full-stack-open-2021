@@ -20,3 +20,5 @@
 - [Part 6](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%206)
   - [Unicafe-Redux](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%206/unicafe-redux)
   - [Redux-Anecdotes](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%206/redux-anecdotes)
+- [Part 7](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207)
+  - [Routed-Anecdotes](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/routed-anecdotes)
