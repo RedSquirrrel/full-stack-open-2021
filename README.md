@@ -22,5 +22,5 @@
   - [Redux-Anecdotes](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%206/redux-anecdotes)
 - [Part 7](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207)
   - [Routed-Anecdotes](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/routed-anecdotes)
-  - [Country-Hooks](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/country-hooks)
-  - [Ultimate-Hooks](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/ultimate-hooks)
+  - [Country-Hook](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/country-hook)
+  - [Ultimate-Hooks](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/ultimate-hook)
