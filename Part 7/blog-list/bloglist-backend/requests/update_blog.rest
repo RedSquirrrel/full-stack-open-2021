@@ -1,0 +1,9 @@
+PUT  http://localhost:3003/api/blogs/61606eed750b0296106ca062
+Content-Type: application/json
+ 
+{
+    "title": "Let’s Dive Into Cypress For End-to-End Testing",
+    "author": "Ramona Schwering",
+    "url": "https://www.smashingmagazine.com/2021/09/cypress-end-to-end-testing/",
+    "likes": 55    
+}

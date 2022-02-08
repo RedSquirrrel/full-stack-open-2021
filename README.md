@@ -24,3 +24,4 @@
   - [Routed-Anecdotes](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/routed-anecdotes)
   - [Country-Hook](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/country-hook)
   - [Ultimate-Hooks](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/ultimate-hooks)
+  - [Extending the bloglist](https://github.com/RedSquirrrel/full-stack-open-2021/tree/main/Part%207/blog-list)
