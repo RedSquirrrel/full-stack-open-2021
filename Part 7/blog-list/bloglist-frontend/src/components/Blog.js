@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { likeABlog, deleteABlog } from '../reducers/blogsReducer';
 
-const Blog = ({ blog, updateBlog, deleteBlog, blogPostByUser }) => {
+const Blog = ({ blog, blogPostByUser }) => {
+  const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
 
   const label = !show ? 'View' : 'Hide';
   const toggleShow = () => {
     setShow(show => !show);
+  };
+
+  const updateBlog = (id, like) => {
+    dispatch(likeABlog(id, like));
+  };
+
+  const deleteBlog = id => {
+    if (window.confirm(`Remove blog "${blog.title}" by "${blog.author}"`)) {
+      dispatch(deleteABlog(id));
+    }
   };
 
   const blogStyle = {
@@ -35,7 +49,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, blogPostByUser }) => {
           <div>{blog.url}</div>
           <div>
             Likes: {blog.likes}
-            <button id='like-button' className='likeBtn' onClick={() => updateBlog(blog.id)}>
+            <button id='like-button' className='likeBtn' onClick={() => updateBlog(blog.id, blog.likes)}>
               Like
             </button>
           </div>
@@ -52,9 +66,6 @@ const Blog = ({ blog, updateBlog, deleteBlog, blogPostByUser }) => {
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
-  updateBlog: PropTypes.func.isRequired,
-  deleteBlog: PropTypes.func.isRequired,
-  user: PropTypes.object,
 };
 
 export default Blog;

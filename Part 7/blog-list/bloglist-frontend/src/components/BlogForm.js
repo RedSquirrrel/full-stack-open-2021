@@ -1,25 +1,37 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { createBlog } from '../reducers/blogsReducer';
+import { showNotification } from '../reducers/notificationReducer';
 
-const BlogForm = ({ newBlogObject }) => {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [url, setUrl] = useState('');
+const BlogForm = ({ blogFormRef }) => {
+  const dispatch = useDispatch();
 
   const addBlog = async e => {
     e.preventDefault();
-    newBlogObject({
-      title: title,
-      author: author,
-      url: url,
-    });
-    if (title === '' && author === '' && url === '') {
+
+    blogFormRef.current.toggleVisibility();
+
+    const title = e.target.title.value;
+    const author = e.target.author.value;
+    const url = e.target.url.value;
+
+    e.target.title.value = '';
+    e.target.author.value = '';
+    e.target.url.value = '';
+
+    const content = {
+      title,
+      author,
+      url,
+    };
+    dispatch(createBlog(content));
+
+    dispatch(showNotification(`A new blog "${content.title}" by "${content.author}" added`, 'success', 2));
+
+    if (!(title && author && url)) {
+      dispatch(showNotification('Add a title, author and url', 'error', 2));
       return;
     }
-
-    setTitle('');
-    setAuthor('');
-    setUrl('');
   };
 
   return (
@@ -28,13 +40,13 @@ const BlogForm = ({ newBlogObject }) => {
       <form onSubmit={addBlog}>
         <div>
           Title:
-          <input id='title' type='text' value={title} name='title' onChange={({ target }) => setTitle(target.value)} />
+          <input id='title' type='text' name='title' />
         </div>
         <div>
-          Author: <input id='author' type='text' value={author} onChange={({ target }) => setAuthor(target.value)} />
+          Author: <input id='author' type='text' name='author' />
         </div>
         <div>
-          Url: <input id='url' type='text' value={url} onChange={({ target }) => setUrl(target.value)} />
+          Url: <input id='url' type='text' name='url' />
         </div>
         <button id='submitBtn' type='submit'>
           Create
@@ -42,10 +54,6 @@ const BlogForm = ({ newBlogObject }) => {
       </form>
     </div>
   );
-};
-
-BlogForm.propTypes = {
-  newBlogObject: PropTypes.func.isRequired,
 };
 
 export default BlogForm;

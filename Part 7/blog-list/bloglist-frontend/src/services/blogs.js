@@ -19,8 +19,9 @@ const create = blog => {
   return request.then(response => response.data);
 };
 
-const update = blog => {
-  const request = axios.put(`${baseUrl}/${blog.id}`, blog, getConfig());
+const update = (id, likes) => {
+  const newObj = { id, likes: likes };
+  const request = axios.put(`${baseUrl}/${id}`, newObj, getConfig());
   return request.then(response => response.data);
 };
 
