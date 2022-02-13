@@ -30,4 +30,4 @@ const removeBlog = id => {
   return request.then(response => response.data);
 };
 
-export default { getAll, create, update, removeBlog };
+export default { getAll, create, update, removeBlog, getConfig };
