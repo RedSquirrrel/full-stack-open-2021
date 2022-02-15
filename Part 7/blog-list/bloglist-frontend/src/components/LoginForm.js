@@ -1,5 +1,5 @@
 import React from 'react';
-import { login } from '../reducers/userReducer';
+import { login } from '../reducers/authReducer';
 import { useDispatch } from 'react-redux';
 
 const LoginForm = () => {
@@ -7,8 +7,8 @@ const LoginForm = () => {
 
   const handleLogin = async e => {
     e.preventDefault();
-    const username = e.target.username.value;
-    const password = e.target.password.value;
+    const username = await e.target.username.value;
+    const password = await e.target.password.value;
     dispatch(login(username, password));
     e.target.username.value = '';
     e.target.password.value = '';

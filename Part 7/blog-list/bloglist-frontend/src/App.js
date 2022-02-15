@@ -1,60 +1,54 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeBlogs } from './reducers/blogsReducer';
-
+import Blogs from './components/Blogs';
 import Blog from './components/Blog';
-import BlogForm from './components/BlogForm';
-import Togglable from './components/Togglable';
+import User from './components/User';
+import Users from './components/Users';
 import Notification from './components/Notification';
 import LoginForm from './components/LoginForm';
 
-import { logOut, loadUser } from './reducers/userReducer';
+import { logOut, loadUser } from './reducers/authReducer';
+import { initializeUsers } from './reducers/usersReducer';
 import './index.css';
 
 const App = () => {
   const dispatch = useDispatch();
+  const userInfo = useSelector(state => state.loggedUser);
   const blogs = useSelector(state => state.blogs);
-  const userInfo = useSelector(state => state.user);
-
-  const blogFormRef = useRef();
 
   useEffect(() => {
     dispatch(initializeBlogs());
-  }, []);
-
-  useEffect(() => {
+    dispatch(initializeUsers());
     dispatch(loadUser());
-  }, []);
+  }, [blogs.length]);
 
   const handleLogOut = () => {
-    dispatch(logOut(userInfo.user));
+    dispatch(logOut(userInfo));
     window.location.href = '/';
   };
 
   return (
     <div>
       <Notification />
-      <div>
-        {userInfo === null ? (
-          <LoginForm />
-        ) : (
-          <div>
-            <h1>Blogs</h1>
-            <h3 style={{ display: 'inline' }}>{userInfo.username} logged in </h3>
-            <button onClick={handleLogOut}>Logout</button>
-            <Togglable buttonLabel='Create A New Blog' ref={blogFormRef}>
-              <BlogForm blogFormRef={blogFormRef} />
-            </Togglable>
-            {blogs.length ? (
-              blogs.map(blog => {
-                return <Blog key={blog.id} blog={blog} blogPostByUser={userInfo.username === blog.user.username} />;
-              })
-            ) : (
-              <h3>No blogs exists</h3>
-            )}
-          </div>
-        )}
-      </div>
+      <Link to='/'>Blogs</Link>
+      <Link to='/users'>Users</Link>
+
+      {userInfo && (
+        <p style={{ display: 'inline' }}>
+          {userInfo.name} logged in
+          <button onClick={handleLogOut}>Logout</button>
+        </p>
+      )}
+
+      <Routes>
+        <Route path='/blogs/:id' element={<Blog />} />
+        <Route path='/users/:id' element={<User />} />
+        <Route path='/users' element={userInfo === null ? <LoginForm /> : <Users />} />
+        <Route path='/login' element={<LoginForm />} />
+        <Route path='/' element={userInfo === null ? <LoginForm /> : <Blogs />} />
+      </Routes>
     </div>
   );
 };

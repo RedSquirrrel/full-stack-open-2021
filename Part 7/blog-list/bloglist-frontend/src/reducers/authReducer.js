@@ -1,16 +1,9 @@
-// import userServices from '../services/user';
 import blogsServices from '../services/blogs';
 import loginServices from '../services/login';
 import storage from '../utlis/storage';
 import { showNotification } from './notificationReducer';
 
-const initialState = {
-  token: null,
-  user: null,
-  isLoading: false,
-};
-
-const userReducer = (state = initialState, action) => {
+const authReducer = (state = null, action) => {
   switch (action.type) {
     case 'LOAD_USER':
       return action.data;
@@ -19,11 +12,7 @@ const userReducer = (state = initialState, action) => {
       return action.data;
 
     case 'LOG_OUT':
-      return {
-        ...state,
-        token: null,
-        user: null,
-      };
+      return action.data;
 
     default:
       return state;
@@ -68,4 +57,4 @@ export const logOut = () => {
   };
 };
 
-export default userReducer;
+export default authReducer;
