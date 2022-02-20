@@ -6,7 +6,7 @@ import { showNotification } from '../reducers/notificationReducer';
 const BlogForm = ({ blogFormRef }) => {
   const dispatch = useDispatch();
 
-  const addBlog = async e => {
+  const addBlog = e => {
     e.preventDefault();
 
     blogFormRef.current.toggleVisibility();

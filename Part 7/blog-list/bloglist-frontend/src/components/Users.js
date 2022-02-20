@@ -20,7 +20,6 @@ const Users = () => {
                 <tbody>
                   {users &&
                     users.map(u => {
-                      console.log(u);
                       return (
                         <tr key={u.id}>
                           <td>

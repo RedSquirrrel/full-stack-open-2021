@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { likeABlog, deleteABlog } from '../reducers/blogsReducer';
+import { likeABlog, deleteABlog, createComment } from '../reducers/blogsReducer';
 
 const Blog = () => {
   const dispatch = useDispatch();
@@ -25,6 +25,15 @@ const Blog = () => {
     if (window.confirm(`Remove blog "${blog.title}" by "${blog.author}"`)) {
       dispatch(deleteABlog(id));
     }
+  };
+
+  const addComment = e => {
+    e.preventDefault();
+
+    const comment = e.target.comment.value;
+    e.target.comment.value = '';
+
+    dispatch(createComment(blog.id, blog, comment));
   };
 
   const blogStyle = {
@@ -60,6 +69,19 @@ const Blog = () => {
             Remove
           </button>
         )}
+        <div>
+          <p>Comments:</p>
+          <form onSubmit={addComment}>
+            <input name='comment' type='text' />
+            <button>Add comment</button>
+          </form>
+          <ul>
+            {blog.comment &&
+              blog.comment.map((c, i) => {
+                return <li key={i}>{c}</li>;
+              })}
+          </ul>
+        </div>
       </div>
     </div>
   );
