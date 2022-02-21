@@ -4,17 +4,17 @@ const blogSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    minLength: 5,
+    minLength: [5, ' Title "{VALUE}" is too short. Add at least 5 characters'],
   },
   author: {
     type: String,
     required: true,
-    minLength: 5,
+    minLength: [5, ' Author "{VALUE}" is too short. Add at least 5 characters'],
   },
   url: {
     type: String,
     required: true,
-    minLength: 5,
+    minLength: [5, ' Url "{VALUE}" is too short. Add at least 5 characters'],
   },
   likes: Number,
   user: {

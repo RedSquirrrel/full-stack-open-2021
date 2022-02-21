@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createBlog } from '../reducers/blogsReducer';
-import { showNotification } from '../reducers/notificationReducer';
 
 const BlogForm = ({ blogFormRef }) => {
   const dispatch = useDispatch();
@@ -19,19 +18,8 @@ const BlogForm = ({ blogFormRef }) => {
     e.target.author.value = '';
     e.target.url.value = '';
 
-    const content = {
-      title,
-      author,
-      url,
-    };
+    const content = { title, author, url };
     dispatch(createBlog(content));
-
-    dispatch(showNotification(`A new blog "${content.title}" by "${content.author}" added`, 'success', 2));
-
-    if (!(title && author && url)) {
-      dispatch(showNotification('Add a title, author and url', 'error', 2));
-      return;
-    }
   };
 
   return (

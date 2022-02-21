@@ -1,4 +1,5 @@
 import blogsServices from '../services/blogs';
+import { showNotification } from './notificationReducer';
 
 const blogsReducer = (state = [], action) => {
   switch (action.type) {
@@ -47,11 +48,22 @@ export const initializeBlogs = () => {
 
 export const createBlog = content => {
   return async dispatch => {
-    const newBlog = await blogsServices.create(content);
-    dispatch({
-      type: 'NEW_BLOG',
-      data: newBlog,
-    });
+    try {
+      const newBlog = await blogsServices.create(content);
+      dispatch({
+        type: 'NEW_BLOG',
+        data: newBlog,
+      });
+      dispatch(showNotification(`A new blog "${content.title}" by "${content.author}" added`, 'success', 5));
+    } catch (error) {
+      if (!(content.title && content.author && content.url)) {
+        dispatch(showNotification('Title, Author and URL is required', 'error', 5));
+        return;
+      }
+      let mongoError = error.response.data.error;
+      let splitedMessage = mongoError.split(':');
+      dispatch(showNotification(`${splitedMessage[2]}`, 'error', 5));
+    }
   };
 };
 
