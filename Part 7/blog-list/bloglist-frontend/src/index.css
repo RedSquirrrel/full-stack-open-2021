@@ -1,21 +1,20 @@
-.error {
-  color: rgb(255, 0, 0);
-  background: lightgrey;
-  font-size: 20px;
-  border-style: solid;
-  border-radius: 5px;
-  padding: 0.8rem;
-  margin: 1rem;
-  width: 50%;
+body {
+  /* background: #28a95e;
+  background: #0c469d; */
+  background: rgb(12, 70, 157);
+  background: linear-gradient(
+    169deg,
+    rgba(255, 255, 255, 0.552) 0,
+    rgba(209, 216, 226, 0.552) 44.99999%,
+    rgba(184, 197, 212, 0.552) 45%,
+    rgba(135, 154, 180, 0.552) 100%
+  );
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
 }
-
-.success {
-  color: green;
-  background: lightgrey;
-  font-size: 20px;
-  border-style: solid;
-  border-radius: 5px;
-  padding: 0.8rem;
-  margin: 1rem;
-  width: 50%;
+.text {
+  color: rgb(70, 70, 70);
+}
+a {
+  text-decoration: none;
 }

@@ -54,15 +54,15 @@ export const createBlog = content => {
         type: 'NEW_BLOG',
         data: newBlog,
       });
-      dispatch(showNotification(`A new blog "${content.title}" by "${content.author}" added`, 'success', 5));
+      dispatch(showNotification(`A new blog "${content.title}" by "${content.author}" added`, 'alert-success', 5));
     } catch (error) {
       if (!(content.title && content.author && content.url)) {
-        dispatch(showNotification('Title, Author and URL is required', 'error', 5));
+        dispatch(showNotification('Title, Author and URL is required', 'alert-danger', 5));
         return;
       }
       let mongoError = error.response.data.error;
       let splitedMessage = mongoError.split(':');
-      dispatch(showNotification(`${splitedMessage[2]}`, 'error', 5));
+      dispatch(showNotification(`${splitedMessage[2]}`, 'alert-danger', 5));
     }
   };
 };

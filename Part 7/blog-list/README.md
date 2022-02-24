@@ -11,3 +11,9 @@
 - 7.16: Blog view
 
 - 7.17: Navigation
+
+- 7.18: comments, step1
+- 7.19: comments, step2
+
+- 7.20: Styles, step1
+- 7.21: Styles, step2

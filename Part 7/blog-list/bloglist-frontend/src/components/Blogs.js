@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BlogForm from './BlogForm';
@@ -10,25 +11,41 @@ const Blogs = () => {
 
   return (
     <div>
-      <h1>Blog App</h1>
+      <h3 className='my-5'>Blog App</h3>
 
       <Togglable buttonLabel='Create A New Blog' ref={blogFormRef}>
         <BlogForm blogFormRef={blogFormRef} />
       </Togglable>
 
-      <ul>
-        {blogs.length ? (
-          blogs.map(blog => (
-            <li key={blog.id}>
-              <Link to={`/blogs/${blog.id}`}>
-                {blog.title} <strong style={{ color: '#f5eda9' }}>by {blog.author}</strong>
-              </Link>
-            </li>
-          ))
-        ) : (
-          <h3>No blogs exists</h3>
-        )}
-      </ul>
+      <Table striped bordered hover variant='dark'>
+        <thead>
+          <tr>
+            <th>Blogs Titles</th>
+            <th>Added by </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {blogs.length ? (
+            blogs.map(blog => (
+              <tr key={blog.id}>
+                <td>
+                  <Link to={`/blogs/${blog.id}`}>
+                    {blog.title} <strong className='text white'>by {blog.author}</strong>
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`/users/${blog.user.id}`}> {blog.user.username}</Link>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td className='h4'>No blogs exists</td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
     </div>
   );
 };

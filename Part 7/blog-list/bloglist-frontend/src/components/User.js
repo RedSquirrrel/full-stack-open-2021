@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Table } from 'react-bootstrap';
 
 const User = () => {
   const users = useSelector(state => state.users);
@@ -18,11 +19,25 @@ const User = () => {
     <div>
       <h1>{user.name}</h1>
       <p>Added blogs</p>
-      <ul>
-        {user.blogs.map(b => (
-          <li key={b.id}>{b.title} </li>
-        ))}
-      </ul>
+      <Table>
+        <tbody>
+          {user.blogs.length ? (
+            user.blogs.map(b => {
+              return (
+                <tr key={b.id}>
+                  <td>
+                    <Link to={`/blogs/${b.id}`}>{b.title}</Link>
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td className='h4 text-primary'>No blogs saved yet </td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
     </div>
   );
 };

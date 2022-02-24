@@ -30,9 +30,9 @@ export const login = (username, password) => {
         data: user,
       });
 
-      dispatch(showNotification(`Welcome, ${username}`, 'success', 2));
+      dispatch(showNotification(`Welcome, ${username}`, 'alert-success', 2));
     } catch (extention) {
-      dispatch(showNotification('Wrong username or password', 'error', 2));
+      dispatch(showNotification('Wrong username or password', 'alert-danger', 2));
     }
   };
 };
