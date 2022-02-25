@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Switch, Route, Link, useRouteMatch, useHistory } from 'react-router-dom';
+import { Routes, Route, Link, useMatch, useNavigate } from 'react-router-dom';
 import { useField } from './hooks';
 
 const Menu = () => {
@@ -93,7 +93,7 @@ const CreateNew = props => {
   const { reset: resetAuthor, ...author } = useField('text');
   const { reset: resetInfo, ...info } = useField('text');
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -103,7 +103,7 @@ const CreateNew = props => {
       info: info.value,
       votes: 0,
     });
-    history.push('/');
+    navigate('/');
   };
 
   const resetFields = () => {
@@ -152,7 +152,7 @@ const App = () => {
 
   const [notification, setNotification] = useState('');
 
-  const match = useRouteMatch('/anecdotes/:id');
+  const match = useMatch('/anecdotes/:id');
   const anecdote = match ? anecdotes.find(a => a.id === match.params.id) : null;
 
   const addNew = anecdote => {
@@ -182,23 +182,13 @@ const App = () => {
     <div>
       <h1>Software anecdotes</h1>
       <Menu />
-      <Switch>
-        <Route path='/anecdotes/:id'>
-          <Anecdote anecdote={anecdote} />
-        </Route>
 
-        <Route path='/about'>
-          <About />
-        </Route>
-
-        <Route path='/create'>
-          <CreateNew addNew={addNew} />
-        </Route>
-
-        <Route path='/'>
-          <AnecdoteList anecdotes={anecdotes} notification={notification} />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path='/anecdotes/:id' element={<Anecdote anecdote={anecdote} />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/create' element={<CreateNew addNew={addNew} />} />
+        <Route path='/' element={<AnecdoteList anecdotes={anecdotes} notification={notification} />} />
+      </Routes>
 
       <Footer />
     </div>
