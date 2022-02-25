@@ -3,6 +3,7 @@ import { Table, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { likeABlog, deleteABlog, createComment } from '../reducers/blogsReducer';
+import { showNotification } from '../reducers/notificationReducer';
 
 const Blog = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,11 @@ const Blog = () => {
 
     const comment = e.target.comment.value;
     e.target.comment.value = '';
+
+    if (comment === '') {
+      dispatch(showNotification('Add a comment', 'alert-danger', 2));
+      return;
+    }
 
     dispatch(createComment(blog.id, blog, comment));
   };
