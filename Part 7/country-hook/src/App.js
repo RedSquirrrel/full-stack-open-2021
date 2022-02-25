@@ -21,17 +21,15 @@ const useCountry = name => {
   useEffect(() => {
     if (name) {
       axios
-        .get(`https://restcountries.com/v2/name/${name}?fullText=true`)
+        .get(`https://restcountries.com/v3.1/name/${name}?fullText=true`)
         .then(response => {
-          if (response) {
-            setCountry({ data: { ...response.data[0] }, found: true });
-          }
-
-          if (response.data.status === 404) {
-            setCountry({ data: { ...response.data.status }, found: false });
-          }
+          setCountry(response.data[0]);
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          if (error.response.data.status === 404) {
+            setCountry(null);
+          }
+        });
     }
   }, [name]);
 
@@ -42,19 +40,15 @@ const useCountry = name => {
 
 const Country = ({ country }) => {
   if (!country) {
-    return null;
-  }
-
-  if (!country.found) {
     return <div>not found...</div>;
   }
 
   return (
     <div>
-      <h3>{country.data.name} </h3>
-      <div>capital {country.data.capital} </div>
-      <div>population {country.data.population}</div>
-      <img src={country.data.flag} height='100' alt={`flag of ${country.data.name}`} />
+      <h3>{country.name.common}</h3>
+      <div>population {country.population}</div>
+      <div>capital {country.capital}</div>
+      <img src={country.flags.png} height='100' alt={`flag of ${country.name.common}`} />
     </div>
   );
 };
