@@ -48,9 +48,6 @@ const App = () => {
 
   useEffect(() => {
     personService.getAll().then(allPersons => allPersons);
-  }, []);
-
-  useEffect(() => {
     noteService.getAll().then(allNote => allNote);
   }, []);
 

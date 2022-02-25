@@ -15,6 +15,14 @@
     {
       "content": "a new note",
       "id": 4
+    },
+    {
+      "content": "last try",
+      "id": 5
+    },
+    {
+      "content": "fantasic",
+      "id": 6
     }
   ],
   "persons": [
@@ -32,6 +40,16 @@
       "name": "jessica",
       "number": "91-123-4342432",
       "id": 3
+    },
+    {
+      "name": "annabela",
+      "number": "555-555-5555",
+      "id": 4
+    },
+    {
+      "name": "volibear",
+      "number": "111-1111-11111",
+      "id": 5
     }
   ]
 }
